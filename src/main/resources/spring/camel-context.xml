@@ -14,14 +14,8 @@
         <route id="myone-route">
             <from id="_to3" uri="activemq:queue:getWaterOrder.q02.req?jmsMessageType=Bytes&amp;testConnectionOnStartup=true&amp;exchangePattern=InOnly"/>
             <log id="route-log" message=">Sending>> ${body}"/>
-            <setHeader headerName="Content-Type" id="_setHeader1">
-                <constant>application/json</constant>
-            </setHeader>
-            <to id="_to1" pattern="InOut" uri="restlet:http://nodered-tekton-env-dev.dl-ocp-cluster-02-42d238d7dc8f7d8fe16d05b4b69f8075-0000.sng01.containers.appdomain.cloud:80/hello?restletMethod=GET&amp;exchangePattern=InOut"/>
-            <log id="_log1" message="Received >>> ${body}"/>
-            <setHeader headerName="transactionid" id="_setHeader2">
-                <jsonpath>$.Header.transactionId</jsonpath>
-            </setHeader>
+
+           
             <log id="_log2" message="Received header body >>> ${body}"/>
             <to id="_to2" uri="activemq:queue:getWaterOrder.q02.rpl"/>
         </route>
